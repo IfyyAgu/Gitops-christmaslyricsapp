@@ -12,6 +12,8 @@ spec:
       labels:
         app: christmaslyrics-app
     spec:
+      imagePullSecrets:
+      - name: my-docker-registry-secret
       containers:
       - name: christmaslyrics-app-container
         image: ifyagu/christmaslyrics-app:latest
