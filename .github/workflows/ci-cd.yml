@@ -73,7 +73,7 @@ jobs:
     - name: Sign the published Docker image
       if: ${{ github.event_name != 'pull_request' }}
       run: |
-       cosign sign --key cosign.key ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+       cosign sign --key cosign.key ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
 
   update-manifest:
