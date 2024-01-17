@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: christmaslyrics-app-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: christmaslyrics-app
@@ -12,8 +12,6 @@ spec:
       labels:
         app: christmaslyrics-app
     spec:
-      imagePullSecrets:
-      - name: my-docker-registry-secret
       containers:
       - name: christmaslyrics-app-container
         image: ifyagu/christmaslyrics-app:latest
