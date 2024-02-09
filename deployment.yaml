@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: christmaslyrics-app-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: christmaslyrics-app
