@@ -17,8 +17,8 @@ spec:
         image: ifyagu/christmaslyrics-app:latest
         imagePullPolicy: IfNotPresent
         ports:
-        - port: 80
-        - targetPort: 80  
+        - containerPort: 80
+        
  # strategy:
   #  type: RollingUpdate
    # rollingUpdate:
