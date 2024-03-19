@@ -44,7 +44,7 @@ jobs:
       uses: anchore/scan-action@v3
       with:
         image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        fail-build: false
+        #fail-build: false
        
 
     - name: Create SBOM
