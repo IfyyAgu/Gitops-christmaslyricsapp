@@ -45,7 +45,7 @@ jobs:
       with:
         image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         fail-build: false
-        #severity-cutoff: critical
+       
 
     - name: Create SBOM
       uses: anchore/sbom-action@v0
