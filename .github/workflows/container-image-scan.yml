@@ -1,0 +1,60 @@
+name: Auto(CI-CD)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      #event run on psu event and not pull
+    - name: Log into registry ${{ env.REGISTRY }}
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GH_TOKEN }}
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        username: ${{ secrets.D_USERNAME }}
+        password: ${{ secrets.D_PASSWORD }}
+
+    - name: Extract Docker metadata
+      id: meta
+      uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+    - name: Scan image
+      uses: anchore/scan-action@v3
+      with:
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        fail-build: true
+        severity-cutoff: critical
+
+    - name: Create SBOM
+      uses: anchore/sbom-action@v0
+      with:
+        format: spdx-json
+        output-file: "${{ github.event.repository.name }}-sbom.spdx.json"
+
+    - name: Scan SBOM
+      uses: anchore/scan-action@v3
+      with:
+        sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
+
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}
