@@ -68,6 +68,7 @@ jobs:
         
     - name: Scan image
       uses: anchore/scan-action@v3
+      id: scan
       with:
         image: ${{ steps.meta.outputs.tags }}
         fail-build: false
@@ -82,7 +83,6 @@ jobs:
 
     - name: Scan SBOM
       uses: anchore/scan-action@v3
-      id: scan
       with:
         sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
 
