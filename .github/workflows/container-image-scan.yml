@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
     
 env:
-  #specifies the repository to use which is github in this case. Image name is the name of the repo
-  # Use docker.io for Docker Hub if empty
+#specifies the repository to use which is github in this case. Image name is the name of the repo
+# Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ifyagu/Gitops-christmaslyricsapp
