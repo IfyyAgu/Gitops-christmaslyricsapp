@@ -69,7 +69,7 @@ jobs:
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         fail-build: true
         severity-cutoff: critical 
        
