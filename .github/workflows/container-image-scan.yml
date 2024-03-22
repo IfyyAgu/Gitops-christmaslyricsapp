@@ -43,7 +43,7 @@ jobs:
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: https://docker.io/${{ env.IMAGE_NAME }}
+        image: https://docker.io/ifyagu/Gitops-christmaslyricsapp
         fail-build: true
         severity-cutoff: critical 
        
