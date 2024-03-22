@@ -91,6 +91,9 @@ jobs:
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
 
+    - name: Inspect action SARIF report
+      run: cat ${{ steps.scan.outputs.sarif }}
+
 
 
         
