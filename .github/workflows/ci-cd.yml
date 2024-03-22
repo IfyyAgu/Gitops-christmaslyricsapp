@@ -82,6 +82,7 @@ jobs:
 
     - name: Scan SBOM
       uses: anchore/scan-action@v3
+      id: scan
       with:
         sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
 
