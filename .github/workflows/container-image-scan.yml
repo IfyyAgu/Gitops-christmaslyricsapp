@@ -44,7 +44,7 @@ jobs:
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: ifyagu/Gitops-christmaslyricsapp
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         fail-build: true
         severity-cutoff: critical 
        
